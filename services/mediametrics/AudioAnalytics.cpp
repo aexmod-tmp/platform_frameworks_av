@@ -1728,4 +1728,22 @@ std::string AudioAnalytics::getDeviceNamesFromOutputDevices(std::string_view dev
     return deviceNames;
 }
 
+// This method currently suppresses the name.
+std::string AudioAnalytics::getDeviceNamesFromOutputDevices(std::string_view devices) const {
+    std::string deviceNames;
+    if (stringutils::hasBluetoothOutputDevice(devices)) {
+        deviceNames = SUPPRESSED;
+#if 0   // TODO(b/161554630) sanitize name
+        mAudioAnalytics.mAnalyticsState->timeMachine().get(
+            "audio.device.bt_a2dp", AMEDIAMETRICS_PROP_NAME, &deviceNames);
+        // Remove | if present
+        stringutils::replace(deviceNames, "|", '?');
+        if (deviceNames.size() > STATSD_DEVICE_NAME_MAX_LENGTH) {
+            deviceNames.resize(STATSD_DEVICE_NAME_MAX_LENGTH); // truncate
+        }
+#endif
+    }
+    return deviceNames;
+}
+
 } // namespace android::mediametrics
