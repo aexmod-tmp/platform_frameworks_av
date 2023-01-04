@@ -133,6 +133,7 @@ using android::content::AttributionSourceState;
 
 class AudioFlinger : public AudioFlingerServerAdapter::Delegate
 {
+    friend class sp<AudioFlinger>;
 public:
     static void instantiate() ANDROID_API;
 
