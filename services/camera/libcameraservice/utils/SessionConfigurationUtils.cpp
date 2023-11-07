@@ -843,7 +843,7 @@ convertToHALStreamCombination(
             sp<Surface> surface;
             res = createSurfaceFromGbp(streamInfo, isStreamInfoValid, surface, bufferProducer,
                     logicalCameraId, metadataChosen, sensorPixelModesUsed, dynamicRangeProfile,
-                    streamUseCase, timestampBase, mirrorMode, colorSpace, isPriviledgedClien);
+                    streamUseCase, timestampBase, mirrorMode, colorSpace, isPriviledgedClient);
 
             if (!res.isOk())
                 return res;
